@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xs.coal.mapper.ReportManageMapper" >
+  <resultMap id="BaseResultMap" type="com.xs.coal.pojo.ReportManage" >
+    <id column="rid" property="rid" jdbcType="VARCHAR" />
+    <result column="puid" property="puid" jdbcType="INTEGER" />
+    <result column="message" property="message" jdbcType="VARCHAR" />
+    <result column="userid" property="userid" jdbcType="VARCHAR" />
+    <result column="datetime" property="datetime" jdbcType="TIMESTAMP" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+      
+  </resultMap>
+    <resultMap id="BaseReportResultMap" type="com.xs.coal.pojo.Report" >
+     <result column="puid" property="puid" jdbcType="INTEGER" />
+     <result column="indexID" property="indexID" jdbcType="INTEGER" />
+     <result column="plantName" property="plantName" jdbcType="VARCHAR" />
+     <result column="plantLeader" property="plantLeader" jdbcType="VARCHAR" />
+     <result column="plantPhoneNumber" property="plantPhoneNumber" jdbcType="VARCHAR" />
+     <result column="username" property="username" jdbcType="VARCHAR" />
+     <result column="phone" property="phone" jdbcType="VARCHAR" />
+     <result column="reason" property="reason" jdbcType="VARCHAR" />
+     <result column="date" property="date" jdbcType="TIMESTAMP" />
+      <result column="url" property="url" jdbcType="VARCHAR" />
+       <result column="indexName" property="indexName" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <resultMap id="BaseReportDealMap" type="com.xs.coal.pojo.Report" >
+     <result column="puid" property="puid" jdbcType="INTEGER" />
+     <result column="indexID" property="indexID" jdbcType="INTEGER" />
+     <result column="plantName" property="plantName" jdbcType="VARCHAR" />
+     <result column="plantLeader" property="plantLeader" jdbcType="VARCHAR" />
+     <result column="plantPhoneNumber" property="plantPhoneNumber" jdbcType="VARCHAR" />
+     <result column="url" property="url" jdbcType="VARCHAR" />
+     <result column="username" property="username" jdbcType="VARCHAR" />
+     <result column="phone" property="phone" jdbcType="VARCHAR" />
+     <result column="reason" property="reason" jdbcType="VARCHAR" />
+     <result column="date" property="date" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    rid, puid, message, userid, datetime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xs.coal.pojo.ReportManageExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from report_manage
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+   <select id="selectAllReportByplantAndTime" resultMap="BaseReportResultMap"  >
+   select d.puid,i.indexID,p.plantName,p.plantLeader,p.plantPhoneNumber ,i.indexName,d.time,d.date ,u.username,u.phone,d.reason,d.url, d.date from datadeal as d left join  indexsystem as i on d.indexID=i.indexID LEFT JOIN plant as p on i.plantID=p.plantID 
+   LEFT JOIN `user` as u on d.userID=u.userid 
+   <where>
+    <if test="plantID!= null" >
+    p.plantID=#{plantID}
+    </if>
+    <if test="startTime!= null">
+    and d.time=#{startTime}
+    </if>
+     and d.isOver='1' 
+   </where>
+   </select>
+    <select id="selectAllReportDealByplantAndTime" resultMap="BaseReportDealMap"  >
+    select d.puid,i.indexID,p.plantName,u.username,u.phone,d.reason,d.time ,d.url, d.date from datadeal as d left join  indexsystem as i on d.indexID=i.indexID LEFT JOIN plant as p on i.plantID=p.plantID 
+    LEFT JOIN `user` as u on d.userID=u.userid 
+   <where>
+    <if test="plantID!= null" >
+    p.plantID=#{plantID}
+    </if>
+    <if test="startTime!= null">
+    and d.time=#{startTime}
+    </if>
+     and d.isOver='1' 
+   </where>
+  </select>
+  
+    <select id="selectMessageByPuid" resultMap="BaseResultMap"  >
+ select r.message,r.datetime,u.username,r.puid,u.phone from report_manage as r inner JOIN user as u on r.userid=u.userid 
+
+   <where>
+    <if test="puid!= null" >
+     r.puid=#{puid}
+    </if>
+ 
+   </where>
+  </select>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from report_manage
+    where rid = #{rid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from report_manage
+    where rid = #{rid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xs.coal.pojo.ReportManageExample" >
+    delete from report_manage
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xs.coal.pojo.ReportManage" >
+    insert into report_manage (rid, puid, message, 
+      userid, datetime)
+    values (#{rid,jdbcType=VARCHAR}, #{puid,jdbcType=INTEGER}, #{message,jdbcType=VARCHAR}, 
+      #{userid,jdbcType=VARCHAR}, #{datetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xs.coal.pojo.ReportManage" >
+    insert into report_manage
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rid != null" >
+        rid,
+      </if>
+      <if test="puid != null" >
+        puid,
+      </if>
+      <if test="message != null" >
+        message,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="datetime != null" >
+        datetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rid != null" >
+        #{rid,jdbcType=VARCHAR},
+      </if>
+      <if test="puid != null" >
+        #{puid,jdbcType=INTEGER},
+      </if>
+      <if test="message != null" >
+        #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="datetime != null" >
+        #{datetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xs.coal.pojo.ReportManageExample" resultType="java.lang.Integer" >
+    select count(*) from report_manage
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update report_manage
+    <set >
+      <if test="record.rid != null" >
+        rid = #{record.rid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.puid != null" >
+        puid = #{record.puid,jdbcType=INTEGER},
+      </if>
+      <if test="record.message != null" >
+        message = #{record.message,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userid != null" >
+        userid = #{record.userid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.datetime != null" >
+        datetime = #{record.datetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update report_manage
+    set rid = #{record.rid,jdbcType=VARCHAR},
+      puid = #{record.puid,jdbcType=INTEGER},
+      message = #{record.message,jdbcType=VARCHAR},
+      userid = #{record.userid,jdbcType=VARCHAR},
+      datetime = #{record.datetime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xs.coal.pojo.ReportManage" >
+    update report_manage
+    <set >
+      <if test="puid != null" >
+        puid = #{puid,jdbcType=INTEGER},
+      </if>
+      <if test="message != null" >
+        message = #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="datetime != null" >
+        datetime = #{datetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where rid = #{rid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xs.coal.pojo.ReportManage" >
+    update report_manage
+    set puid = #{puid,jdbcType=INTEGER},
+      message = #{message,jdbcType=VARCHAR},
+      userid = #{userid,jdbcType=VARCHAR},
+      datetime = #{datetime,jdbcType=TIMESTAMP}
+    where rid = #{rid,jdbcType=VARCHAR}
+  </update>
+</mapper>

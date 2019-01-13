@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xs.coal.mapper.IndexsystemMapper" >
+  <resultMap id="BaseResultMap" type="com.xs.coal.pojo.Indexsystem" >
+    <id column="indexID" property="indexid" jdbcType="INTEGER" />
+    <result column="plantID" property="plantid" jdbcType="VARCHAR" />
+    <result column="indexName" property="indexname" jdbcType="VARCHAR" />
+    <result column="isdelete" property="isdelete" jdbcType="VARCHAR" />
+    <result column="unit" property="unit" jdbcType="VARCHAR" />
+    <result column="basicNumber" property="basicnumber" jdbcType="TINYINT" />
+    <result column="parentID" property="parentid" jdbcType="VARCHAR" />
+    <result column="addtime" property="addtime" jdbcType="TIMESTAMP" />
+    <result column="max" property="max" jdbcType="DOUBLE" />
+    <result column="min" property="min" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    indexID, plantID, indexName, isdelete, unit, basicNumber, parentID, addtime, max, 
+    min
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xs.coal.pojo.IndexsystemExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from indexsystem
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from indexsystem
+    where indexID = #{indexid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from indexsystem
+    where indexID = #{indexid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xs.coal.pojo.IndexsystemExample" >
+    delete from indexsystem
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xs.coal.pojo.Indexsystem" >
+    insert into indexsystem (indexID, plantID, indexName, 
+      isdelete, unit, basicNumber, 
+      parentID, addtime, max, 
+      min)
+    values (#{indexid,jdbcType=INTEGER}, #{plantid,jdbcType=VARCHAR}, #{indexname,jdbcType=VARCHAR}, 
+      #{isdelete,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, #{basicnumber,jdbcType=TINYINT}, 
+      #{parentid,jdbcType=VARCHAR}, #{addtime,jdbcType=TIMESTAMP}, #{max,jdbcType=DOUBLE}, 
+      #{min,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xs.coal.pojo.Indexsystem" >
+    insert into indexsystem
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="indexid != null" >
+        indexID,
+      </if>
+      <if test="plantid != null" >
+        plantID,
+      </if>
+      <if test="indexname != null" >
+        indexName,
+      </if>
+      <if test="isdelete != null" >
+        isdelete,
+      </if>
+      <if test="unit != null" >
+        unit,
+      </if>
+      <if test="basicnumber != null" >
+        basicNumber,
+      </if>
+      <if test="parentid != null" >
+        parentID,
+      </if>
+      <if test="addtime != null" >
+        addtime,
+      </if>
+      <if test="max != null" >
+        max,
+      </if>
+      <if test="min != null" >
+        min,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="indexid != null" >
+        #{indexid,jdbcType=INTEGER},
+      </if>
+      <if test="plantid != null" >
+        #{plantid,jdbcType=VARCHAR},
+      </if>
+      <if test="indexname != null" >
+        #{indexname,jdbcType=VARCHAR},
+      </if>
+      <if test="isdelete != null" >
+        #{isdelete,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null" >
+        #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="basicnumber != null" >
+        #{basicnumber,jdbcType=TINYINT},
+      </if>
+      <if test="parentid != null" >
+        #{parentid,jdbcType=VARCHAR},
+      </if>
+      <if test="addtime != null" >
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="max != null" >
+        #{max,jdbcType=DOUBLE},
+      </if>
+      <if test="min != null" >
+        #{min,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xs.coal.pojo.IndexsystemExample" resultType="java.lang.Integer" >
+    select count(*) from indexsystem
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update indexsystem
+    <set >
+      <if test="record.indexid != null" >
+        indexID = #{record.indexid,jdbcType=INTEGER},
+      </if>
+      <if test="record.plantid != null" >
+        plantID = #{record.plantid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.indexname != null" >
+        indexName = #{record.indexname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isdelete != null" >
+        isdelete = #{record.isdelete,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unit != null" >
+        unit = #{record.unit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.basicnumber != null" >
+        basicNumber = #{record.basicnumber,jdbcType=TINYINT},
+      </if>
+      <if test="record.parentid != null" >
+        parentID = #{record.parentid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addtime != null" >
+        addtime = #{record.addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.max != null" >
+        max = #{record.max,jdbcType=DOUBLE},
+      </if>
+      <if test="record.min != null" >
+        min = #{record.min,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update indexsystem
+    set indexID = #{record.indexid,jdbcType=INTEGER},
+      plantID = #{record.plantid,jdbcType=VARCHAR},
+      indexName = #{record.indexname,jdbcType=VARCHAR},
+      isdelete = #{record.isdelete,jdbcType=VARCHAR},
+      unit = #{record.unit,jdbcType=VARCHAR},
+      basicNumber = #{record.basicnumber,jdbcType=TINYINT},
+      parentID = #{record.parentid,jdbcType=VARCHAR},
+      addtime = #{record.addtime,jdbcType=TIMESTAMP},
+      max = #{record.max,jdbcType=DOUBLE},
+      min = #{record.min,jdbcType=DOUBLE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xs.coal.pojo.Indexsystem" >
+    update indexsystem
+    <set >
+      <if test="plantid != null" >
+        plantID = #{plantid,jdbcType=VARCHAR},
+      </if>
+      <if test="indexname != null" >
+        indexName = #{indexname,jdbcType=VARCHAR},
+      </if>
+      <if test="isdelete != null" >
+        isdelete = #{isdelete,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null" >
+        unit = #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="basicnumber != null" >
+        basicNumber = #{basicnumber,jdbcType=TINYINT},
+      </if>
+      <if test="parentid != null" >
+        parentID = #{parentid,jdbcType=VARCHAR},
+      </if>
+      <if test="addtime != null" >
+        addtime = #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="max != null" >
+        max = #{max,jdbcType=DOUBLE},
+      </if>
+      <if test="min != null" >
+        min = #{min,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where indexID = #{indexid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xs.coal.pojo.Indexsystem" >
+    update indexsystem
+    set plantID = #{plantid,jdbcType=VARCHAR},
+      indexName = #{indexname,jdbcType=VARCHAR},
+      isdelete = #{isdelete,jdbcType=VARCHAR},
+      unit = #{unit,jdbcType=VARCHAR},
+      basicNumber = #{basicnumber,jdbcType=TINYINT},
+      parentID = #{parentid,jdbcType=VARCHAR},
+      addtime = #{addtime,jdbcType=TIMESTAMP},
+      max = #{max,jdbcType=DOUBLE},
+      min = #{min,jdbcType=DOUBLE}
+    where indexID = #{indexid,jdbcType=INTEGER}
+  </update>
+</mapper>

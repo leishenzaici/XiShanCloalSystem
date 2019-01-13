@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xs.coal.mapper.DataCodcrSsMapper" >
+  <resultMap id="BaseResultMap" type="com.xs.coal.pojo.DataCodcrSs" >
+    <id column="uuid" property="uuid" jdbcType="VARCHAR" />
+    <result column="dataID" property="dataid" jdbcType="VARCHAR" />
+    <result column="planID" property="planid" jdbcType="VARCHAR" />
+    <result column="time" property="time" jdbcType="TIMESTAMP" />
+    <result column="codcr_waste" property="codcrWaste" jdbcType="DOUBLE" />
+    <result column="codcr_sewage" property="codcrSewage" jdbcType="DOUBLE" />
+    <result column="codcr_out" property="codcrOut" jdbcType="DOUBLE" />
+    <result column="ss_waste" property="ssWaste" jdbcType="DOUBLE" />
+    <result column="ss_sewage" property="ssSewage" jdbcType="DOUBLE" />
+    <result column="ss_out" property="ssOut" jdbcType="DOUBLE" />
+    <result column="codcr_analyze" property="codcrAnalyze" jdbcType="DOUBLE" />
+    <result column="ss_analyze" property="ssAnalyze" jdbcType="DOUBLE" />
+    <result column="userID" property="userid" jdbcType="VARCHAR" />
+    <result column="del_flag" property="delFlag" jdbcType="VARCHAR" />
+    <result column="dateTime" property="datetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    uuid, dataID, planID, time, codcr_waste, codcr_sewage, codcr_out, ss_waste, ss_sewage, 
+    ss_out, codcr_analyze, ss_analyze, userID, del_flag, dateTime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xs.coal.pojo.DataCodcrSsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from data_codcr_ss
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from data_codcr_ss
+    where uuid = #{uuid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from data_codcr_ss
+    where uuid = #{uuid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xs.coal.pojo.DataCodcrSsExample" >
+    delete from data_codcr_ss
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xs.coal.pojo.DataCodcrSs" >
+    insert into data_codcr_ss (uuid, dataID, planID, 
+      time, codcr_waste, codcr_sewage, 
+      codcr_out, ss_waste, ss_sewage, 
+      ss_out, codcr_analyze, ss_analyze, 
+      userID, del_flag, dateTime
+      )
+    values (#{uuid,jdbcType=VARCHAR}, #{dataid,jdbcType=VARCHAR}, #{planid,jdbcType=VARCHAR}, 
+      #{time,jdbcType=TIMESTAMP}, #{codcrWaste,jdbcType=DOUBLE}, #{codcrSewage,jdbcType=DOUBLE}, 
+      #{codcrOut,jdbcType=DOUBLE}, #{ssWaste,jdbcType=DOUBLE}, #{ssSewage,jdbcType=DOUBLE}, 
+      #{ssOut,jdbcType=DOUBLE}, #{codcrAnalyze,jdbcType=DOUBLE}, #{ssAnalyze,jdbcType=DOUBLE}, 
+      #{userid,jdbcType=VARCHAR}, #{delFlag,jdbcType=VARCHAR}, #{datetime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xs.coal.pojo.DataCodcrSs" >
+    insert into data_codcr_ss
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uuid != null" >
+        uuid,
+      </if>
+      <if test="dataid != null" >
+        dataID,
+      </if>
+      <if test="planid != null" >
+        planID,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+      <if test="codcrWaste != null" >
+        codcr_waste,
+      </if>
+      <if test="codcrSewage != null" >
+        codcr_sewage,
+      </if>
+      <if test="codcrOut != null" >
+        codcr_out,
+      </if>
+      <if test="ssWaste != null" >
+        ss_waste,
+      </if>
+      <if test="ssSewage != null" >
+        ss_sewage,
+      </if>
+      <if test="ssOut != null" >
+        ss_out,
+      </if>
+      <if test="codcrAnalyze != null" >
+        codcr_analyze,
+      </if>
+      <if test="ssAnalyze != null" >
+        ss_analyze,
+      </if>
+      <if test="userid != null" >
+        userID,
+      </if>
+      <if test="delFlag != null" >
+        del_flag,
+      </if>
+      <if test="datetime != null" >
+        dateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uuid != null" >
+        #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="dataid != null" >
+        #{dataid,jdbcType=VARCHAR},
+      </if>
+      <if test="planid != null" >
+        #{planid,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="codcrWaste != null" >
+        #{codcrWaste,jdbcType=DOUBLE},
+      </if>
+      <if test="codcrSewage != null" >
+        #{codcrSewage,jdbcType=DOUBLE},
+      </if>
+      <if test="codcrOut != null" >
+        #{codcrOut,jdbcType=DOUBLE},
+      </if>
+      <if test="ssWaste != null" >
+        #{ssWaste,jdbcType=DOUBLE},
+      </if>
+      <if test="ssSewage != null" >
+        #{ssSewage,jdbcType=DOUBLE},
+      </if>
+      <if test="ssOut != null" >
+        #{ssOut,jdbcType=DOUBLE},
+      </if>
+      <if test="codcrAnalyze != null" >
+        #{codcrAnalyze,jdbcType=DOUBLE},
+      </if>
+      <if test="ssAnalyze != null" >
+        #{ssAnalyze,jdbcType=DOUBLE},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="datetime != null" >
+        #{datetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xs.coal.pojo.DataCodcrSsExample" resultType="java.lang.Integer" >
+    select count(*) from data_codcr_ss
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update data_codcr_ss
+    <set >
+      <if test="record.uuid != null" >
+        uuid = #{record.uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dataid != null" >
+        dataID = #{record.dataid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.planid != null" >
+        planID = #{record.planid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.time != null" >
+        time = #{record.time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.codcrWaste != null" >
+        codcr_waste = #{record.codcrWaste,jdbcType=DOUBLE},
+      </if>
+      <if test="record.codcrSewage != null" >
+        codcr_sewage = #{record.codcrSewage,jdbcType=DOUBLE},
+      </if>
+      <if test="record.codcrOut != null" >
+        codcr_out = #{record.codcrOut,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ssWaste != null" >
+        ss_waste = #{record.ssWaste,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ssSewage != null" >
+        ss_sewage = #{record.ssSewage,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ssOut != null" >
+        ss_out = #{record.ssOut,jdbcType=DOUBLE},
+      </if>
+      <if test="record.codcrAnalyze != null" >
+        codcr_analyze = #{record.codcrAnalyze,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ssAnalyze != null" >
+        ss_analyze = #{record.ssAnalyze,jdbcType=DOUBLE},
+      </if>
+      <if test="record.userid != null" >
+        userID = #{record.userid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.delFlag != null" >
+        del_flag = #{record.delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.datetime != null" >
+        dateTime = #{record.datetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update data_codcr_ss
+    set uuid = #{record.uuid,jdbcType=VARCHAR},
+      dataID = #{record.dataid,jdbcType=VARCHAR},
+      planID = #{record.planid,jdbcType=VARCHAR},
+      time = #{record.time,jdbcType=TIMESTAMP},
+      codcr_waste = #{record.codcrWaste,jdbcType=DOUBLE},
+      codcr_sewage = #{record.codcrSewage,jdbcType=DOUBLE},
+      codcr_out = #{record.codcrOut,jdbcType=DOUBLE},
+      ss_waste = #{record.ssWaste,jdbcType=DOUBLE},
+      ss_sewage = #{record.ssSewage,jdbcType=DOUBLE},
+      ss_out = #{record.ssOut,jdbcType=DOUBLE},
+      codcr_analyze = #{record.codcrAnalyze,jdbcType=DOUBLE},
+      ss_analyze = #{record.ssAnalyze,jdbcType=DOUBLE},
+      userID = #{record.userid,jdbcType=VARCHAR},
+      del_flag = #{record.delFlag,jdbcType=VARCHAR},
+      dateTime = #{record.datetime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xs.coal.pojo.DataCodcrSs" >
+    update data_codcr_ss
+    <set >
+      <if test="dataid != null" >
+        dataID = #{dataid,jdbcType=VARCHAR},
+      </if>
+      <if test="planid != null" >
+        planID = #{planid,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="codcrWaste != null" >
+        codcr_waste = #{codcrWaste,jdbcType=DOUBLE},
+      </if>
+      <if test="codcrSewage != null" >
+        codcr_sewage = #{codcrSewage,jdbcType=DOUBLE},
+      </if>
+      <if test="codcrOut != null" >
+        codcr_out = #{codcrOut,jdbcType=DOUBLE},
+      </if>
+      <if test="ssWaste != null" >
+        ss_waste = #{ssWaste,jdbcType=DOUBLE},
+      </if>
+      <if test="ssSewage != null" >
+        ss_sewage = #{ssSewage,jdbcType=DOUBLE},
+      </if>
+      <if test="ssOut != null" >
+        ss_out = #{ssOut,jdbcType=DOUBLE},
+      </if>
+      <if test="codcrAnalyze != null" >
+        codcr_analyze = #{codcrAnalyze,jdbcType=DOUBLE},
+      </if>
+      <if test="ssAnalyze != null" >
+        ss_analyze = #{ssAnalyze,jdbcType=DOUBLE},
+      </if>
+      <if test="userid != null" >
+        userID = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="datetime != null" >
+        dateTime = #{datetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where uuid = #{uuid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xs.coal.pojo.DataCodcrSs" >
+    update data_codcr_ss
+    set dataID = #{dataid,jdbcType=VARCHAR},
+      planID = #{planid,jdbcType=VARCHAR},
+      time = #{time,jdbcType=TIMESTAMP},
+      codcr_waste = #{codcrWaste,jdbcType=DOUBLE},
+      codcr_sewage = #{codcrSewage,jdbcType=DOUBLE},
+      codcr_out = #{codcrOut,jdbcType=DOUBLE},
+      ss_waste = #{ssWaste,jdbcType=DOUBLE},
+      ss_sewage = #{ssSewage,jdbcType=DOUBLE},
+      ss_out = #{ssOut,jdbcType=DOUBLE},
+      codcr_analyze = #{codcrAnalyze,jdbcType=DOUBLE},
+      ss_analyze = #{ssAnalyze,jdbcType=DOUBLE},
+      userID = #{userid,jdbcType=VARCHAR},
+      del_flag = #{delFlag,jdbcType=VARCHAR},
+      dateTime = #{datetime,jdbcType=TIMESTAMP}
+    where uuid = #{uuid,jdbcType=VARCHAR}
+  </update>
+</mapper>

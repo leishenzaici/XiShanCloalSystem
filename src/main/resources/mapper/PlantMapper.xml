@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xs.coal.mapper.PlantMapper" >
+  <resultMap id="BaseResultMap" type="com.xs.coal.pojo.Plant" >
+    <id column="plantID" property="plantid" jdbcType="VARCHAR" />
+    <result column="plantName" property="plantname" jdbcType="VARCHAR" />
+    <result column="plantAdress" property="plantadress" jdbcType="VARCHAR" />
+    <result column="plantLeader" property="plantleader" jdbcType="VARCHAR" />
+    <result column="plantPhoneNumber" property="plantphonenumber" jdbcType="VARCHAR" />
+    <result column="pId" property="pId" jdbcType="VARCHAR" />
+    <result column="isApartment" property="isapartment" jdbcType="TINYINT" />
+    <result column="isDelete" property="isdelete" jdbcType="VARCHAR" />
+    <result column="teamName" property="teamname" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    plantID, plantName, plantAdress, plantLeader, plantPhoneNumber, pId, isApartment, 
+    isDelete, teamName
+  </sql>
+  
+  <!-- 公共树的查询 -->
+<select id="getDepartmentTreeCommon" resultMap="BaseResultMap" parameterType="java.lang.String">
+select * FROM plant 
+where isDelete=0
+<if test="plantid!= null"> and plantID like '${plantid}%' </if>
+
+</select>
+<!-- 查询机构 -->
+<select id="getDepartmentTreeFactory" resultMap="BaseResultMap" parameterType="java.lang.String">
+select * FROM plant 
+where isDelete=0
+<if test="plantid!= null"> and pId =${plantid} </if>
+
+</select>
+   <select id="getMaxDictionaryId"  parameterType="java.lang.String"
+		resultType="java.lang.String">
+   select max(plantID) as plantID from plant where pId=#{pId}
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xs.coal.pojo.PlantExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from plant
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from plant
+    where plantID = #{plantid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from plant
+    where plantID = #{plantid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xs.coal.pojo.PlantExample" >
+    delete from plant
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xs.coal.pojo.Plant" >
+    insert into plant (plantID, plantName, plantAdress, 
+      plantLeader, plantPhoneNumber, pId, 
+      isApartment, isDelete, teamName
+      )
+    values (#{plantid,jdbcType=VARCHAR}, #{plantname,jdbcType=VARCHAR}, #{plantadress,jdbcType=VARCHAR}, 
+      #{plantleader,jdbcType=VARCHAR}, #{plantphonenumber,jdbcType=VARCHAR}, #{pId,jdbcType=VARCHAR}, 
+      #{isapartment,jdbcType=TINYINT}, #{isdelete,jdbcType=VARCHAR}, #{teamname,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xs.coal.pojo.Plant" >
+    insert into plant
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="plantid != null" >
+        plantID,
+      </if>
+      <if test="plantname != null" >
+        plantName,
+      </if>
+      <if test="plantadress != null" >
+        plantAdress,
+      </if>
+      <if test="plantleader != null" >
+        plantLeader,
+      </if>
+      <if test="plantphonenumber != null" >
+        plantPhoneNumber,
+      </if>
+      <if test="pId != null" >
+        pId,
+      </if>
+      <if test="isapartment != null" >
+        isApartment,
+      </if>
+      <if test="isdelete != null" >
+        isDelete,
+      </if>
+      <if test="teamname != null" >
+        teamName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="plantid != null" >
+        #{plantid,jdbcType=VARCHAR},
+      </if>
+      <if test="plantname != null" >
+        #{plantname,jdbcType=VARCHAR},
+      </if>
+      <if test="plantadress != null" >
+        #{plantadress,jdbcType=VARCHAR},
+      </if>
+      <if test="plantleader != null" >
+        #{plantleader,jdbcType=VARCHAR},
+      </if>
+      <if test="plantphonenumber != null" >
+        #{plantphonenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="pId != null" >
+        #{pId,jdbcType=VARCHAR},
+      </if>
+      <if test="isapartment != null" >
+        #{isapartment,jdbcType=TINYINT},
+      </if>
+      <if test="isdelete != null" >
+        #{isdelete,jdbcType=VARCHAR},
+      </if>
+      <if test="teamname != null" >
+        #{teamname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xs.coal.pojo.PlantExample" resultType="java.lang.Integer" >
+    select count(*) from plant
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update plant
+    <set >
+      <if test="record.plantid != null" >
+        plantID = #{record.plantid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.plantname != null" >
+        plantName = #{record.plantname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.plantadress != null" >
+        plantAdress = #{record.plantadress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.plantleader != null" >
+        plantLeader = #{record.plantleader,jdbcType=VARCHAR},
+      </if>
+      <if test="record.plantphonenumber != null" >
+        plantPhoneNumber = #{record.plantphonenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pId != null" >
+        pId = #{record.pId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isapartment != null" >
+        isApartment = #{record.isapartment,jdbcType=TINYINT},
+      </if>
+      <if test="record.isdelete != null" >
+        isDelete = #{record.isdelete,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teamname != null" >
+        teamName = #{record.teamname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update plant
+    set plantID = #{record.plantid,jdbcType=VARCHAR},
+      plantName = #{record.plantname,jdbcType=VARCHAR},
+      plantAdress = #{record.plantadress,jdbcType=VARCHAR},
+      plantLeader = #{record.plantleader,jdbcType=VARCHAR},
+      plantPhoneNumber = #{record.plantphonenumber,jdbcType=VARCHAR},
+      pId = #{record.pId,jdbcType=VARCHAR},
+      isApartment = #{record.isapartment,jdbcType=TINYINT},
+      isDelete = #{record.isdelete,jdbcType=VARCHAR},
+      teamName = #{record.teamname,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xs.coal.pojo.Plant" >
+    update plant
+    <set >
+      <if test="plantname != null" >
+        plantName = #{plantname,jdbcType=VARCHAR},
+      </if>
+      <if test="plantadress != null" >
+        plantAdress = #{plantadress,jdbcType=VARCHAR},
+      </if>
+      <if test="plantleader != null" >
+        plantLeader = #{plantleader,jdbcType=VARCHAR},
+      </if>
+      <if test="plantphonenumber != null" >
+        plantPhoneNumber = #{plantphonenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="pId != null" >
+        pId = #{pId,jdbcType=VARCHAR},
+      </if>
+      <if test="isapartment != null" >
+        isApartment = #{isapartment,jdbcType=TINYINT},
+      </if>
+      <if test="isdelete != null" >
+        isDelete = #{isdelete,jdbcType=VARCHAR},
+      </if>
+      <if test="teamname != null" >
+        teamName = #{teamname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where plantID = #{plantid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xs.coal.pojo.Plant" >
+    update plant
+    set plantName = #{plantname,jdbcType=VARCHAR},
+      plantAdress = #{plantadress,jdbcType=VARCHAR},
+      plantLeader = #{plantleader,jdbcType=VARCHAR},
+      plantPhoneNumber = #{plantphonenumber,jdbcType=VARCHAR},
+      pId = #{pId,jdbcType=VARCHAR},
+      isApartment = #{isapartment,jdbcType=TINYINT},
+      isDelete = #{isdelete,jdbcType=VARCHAR},
+      teamName = #{teamname,jdbcType=VARCHAR}
+    where plantID = #{plantid,jdbcType=VARCHAR}
+  </update>
+</mapper>

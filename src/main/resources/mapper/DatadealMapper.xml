@@ -1,0 +1,704 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xs.coal.mapper.DatadealMapper">
+	<resultMap id="BaseResultMap" type="com.xs.coal.pojo.Datadeal">
+		<id column="puid" property="puid" jdbcType="INTEGER" />
+		<result column="url" property="url" jdbcType="VARCHAR" />
+		<result column="indexID" property="indexid" jdbcType="INTEGER" />
+		<result column="dataID" property="dataid" jdbcType="VARCHAR" />
+		<result column="indexNumber" property="indexnumber" jdbcType="DOUBLE" />
+		<result column="userID" property="userid" jdbcType="VARCHAR" />
+		<result column="time" property="time" jdbcType="VARCHAR" />
+		<result column="commandUserID" property="commanduserid"
+			jdbcType="VARCHAR" />
+		<result column="commandTime" property="commandtime" jdbcType="TIMESTAMP" />
+		<result column="note" property="note" jdbcType="VARCHAR" />
+		<result column="command" property="command" jdbcType="VARCHAR" />
+		<result column="date" property="date" jdbcType="TIMESTAMP" />
+		<result column="isOver" property="isover" jdbcType="VARCHAR" />
+		<result column="overNumber" property="overnumber" jdbcType="DOUBLE" />
+	</resultMap>
+	<resultMap id="ResultMapWithBLOBs" type="com.xs.coal.pojo.Datadeal"
+		extends="BaseResultMap">
+		<result column="reason" property="reason" jdbcType="LONGVARCHAR" />
+	</resultMap>
+
+	<resultMap id="ResultByPlantIds" type="com.xs.coal.pojo.Datadeal"
+		extends="BaseResultMap">
+		<result column="plantID" property="plantID" jdbcType="VARCHAR" />
+		<result column="username" property="username" jdbcType="VARCHAR" />
+		<result column="max" property="max" jdbcType="DOUBLE" />
+		<result column="min" property="min" jdbcType="DOUBLE" />
+		<result column="puid" property="puid" jdbcType="VARCHAR" />
+		<result column="reason" property="reason" jdbcType="LONGVARCHAR" />
+	</resultMap>
+
+	<resultMap id="ResultManageDateDto" type="com.xs.coal.pojo.ManageDateDto"
+		extends="BaseResultMap">
+		<result column="plantName" property="plantname" jdbcType="VARCHAR" />
+		<result column="username" property="username" jdbcType="VARCHAR" />
+		<result column="max" property="max" jdbcType="DOUBLE" />
+		<result column="min" property="min" jdbcType="DOUBLE" />
+
+
+	</resultMap>
+
+	<resultMap id="selectByIndexIDGroupByTimeResultMap" type="com.xs.coal.pojo.Datadeal"
+		extends="BaseResultMap">
+		<result column="sum" property="sum" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		puid, url, indexID, dataID, indexNumber, userID, time,
+		commandUserID,
+		commandTime,
+		note, command, date, isOver, overNumber
+	</sql>
+	<sql id="Blob_Column_List">
+		reason
+	</sql>
+	<select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs"
+		parameterType="com.xs.coal.pojo.DatadealExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from datadeal
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByExample" resultMap="BaseResultMap"
+		parameterType="com.xs.coal.pojo.DatadealExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from datadeal
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from datadeal
+		where puid = #{puid,jdbcType=INTEGER}
+	</select>
+
+	<select id="selectByPlantID" resultMap="ResultByPlantIds">
+		select * from datadeal d INNER JOIN indexsystem i on
+		d.indexID=i.indexID INNER JOIN plant p on i.plantID=p.plantID
+		<where>
+
+			<if test="plantID!=null">
+				i.plantID =#{plantID}
+			</if>
+			<if test="startTime!=null and endTime!=null ">
+				and time between #{startTime} and #{endTime}
+			</if>
+
+		</where>
+		order by puid desc
+	</select>
+
+	<select id="selectBySelectByFor" resultType="String">
+
+		select dataID from datadeal d INNER JOIN indexsystem i on
+		d.indexID=i.indexID INNER JOIN plant p on i.plantID=p.plantID
+		<where>
+			<foreach collection="datadealList" separator="or" item="instance">
+				<if test="instance.indexid!=null">
+					d.indexId =#{instance.indexid}
+				</if>
+				<if test="instance.min!=null and instance.max!=null">
+					and indexNumber between #{instance.min} and
+					#{instance.max}
+				</if>
+				<if test="instance.startTime!=null and instance.endTime!=null">
+					and date between #{instance.startTime} and
+					#{instance.endTime}
+				</if>
+			</foreach>
+		</where>
+		order by date desc
+
+	</select>
+
+	<select id="selectBySelect" resultMap="ResultByPlantIds">
+		select * from datadeal d INNER JOIN indexsystem i on
+		d.indexID=i.indexID INNER JOIN plant p on i.plantID=p.plantID
+		<where>
+
+			<if test="indexId!=null">
+				d.indexId =#{indexId}
+			</if>
+			<if test="min!=null and max!=null ">
+				and indexNumber between #{min} and #{max}
+			</if>
+			<if test="startTime!=null and endTime!=null ">
+				and date between #{startTime} and #{endTime}
+			</if>
+		</where>
+		order by date desc
+	</select>
+
+	<select id="selectBySelectNum" resultType="Integer">
+		select count(*) from datadeal d INNER JOIN indexsystem i on
+		d.indexID=i.indexID INNER JOIN plant p on i.plantID=p.plantID
+		<where>
+
+			<if test="indexId!=null">
+				d.indexId =#{indexId}
+			</if>
+			<if test="min!=null and max!=null ">
+				and indexNumber between #{min} and #{max}
+			</if>
+			<if test="startTime!=null and endTime!=null ">
+				and date between #{startTime} and #{endTime}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectByDataID" resultMap="ResultByPlantIds">
+		select * from datadeal d INNER JOIN indexsystem i on
+		d.indexID=i.indexID INNER JOIN plant p on i.plantID=p.plantID
+		INNER
+		JOIN user u on u.userid=d.userID
+		<where>
+			<if test="dataID">
+				dataID =#{dataID}
+			</if>
+		</where>
+		order by d.indexId desc
+	</select>
+
+	<select id="selectByDataIDByFor" resultMap="ResultByPlantIds">
+		select * from datadeal d INNER JOIN indexsystem i on
+		d.indexID=i.indexID INNER JOIN plant p on i.plantID=p.plantID
+		INNER
+		JOIN user u on u.userid=d.userID
+		<where>
+			dataID in
+			<foreach item="dataId" collection="dataIdList" separator="," open="(" close=")" index="">
+				#{dataId}
+			</foreach>
+		</where>
+		order by d.indexId desc
+	</select>
+
+	<select id="selectIndexNumberSum" resultType="Double">
+		select sum(indexNumber) from datadeal
+		<where>
+			<if test="indexid!=null">
+				indexID =#{indexid}
+			</if>
+			<if test="startTime!=null and endTime!=null ">
+				and time between #{startTime} and #{endTime}
+			</if>
+
+		</where>
+		order by puid desc
+	</select>
+	<select id="selectResportByPlantID" resultMap="ResultByPlantIds">
+		select * from datadeal d INNER JOIN indexsystem i on
+		d.indexID=i.indexID INNER JOIN plant p on i.plantID=p.plantID
+		LEFT JOIN
+		user u on d.userID=u.userId
+		<where>
+			<if test="plantID!=null">
+				i.plantID =#{plantID}
+			</if>
+			<if test="startTime!=null and endTime!=null ">
+				and d.time between #{startTime} and #{endTime}
+			</if>
+			<if test="username!=null">
+				and username like '%${username}%'
+			</if>
+		</where>
+		and isOver='1'
+		order by puid desc
+	</select>
+
+	<select id="selectByIndexIDGroupByTime" resultMap="selectByIndexIDGroupByTimeResultMap">
+		select sum(indexNumber) as sum,time from datadeal
+		<where>
+			<if test="indexID!=null">
+				indexID =#{indexID}
+			</if>
+			<if test="startTime!=null and endTime!=null ">
+				and time between #{startTime} and #{endTime}
+			</if>
+		</where>
+		group by time order by time
+	</select>
+
+	<select id="selectPageByPlantID" resultMap="ResultByPlantIds">
+		select * from datadeal d INNER JOIN indexsystem i on
+		d.indexID=i.indexID INNER JOIN plant p on i.plantID=p.plantID
+		<where>
+			<if test="plantID!=null">
+				i.plantID =#{plantID}
+			</if>
+			<if test="startTime!=null and endTime!=null ">
+				and time between #{startTime} and #{endTime}
+			</if>
+
+			order by date DESC
+			<if test="index!=null and currentCount!=null ">
+				limit #{index} , #{currentCount}
+			</if>
+		</where>
+	</select>
+	<!-- 根据工厂id分页查询 -->
+	<select id="selectManageByPlantID" resultMap="ResultManageDateDto">
+		select plantName,puid,d.indexID as indexid,dataID,indexNumber,d.userID
+		as userid,username,d.time,date,indexName,max,min
+		from datadeal d INNER
+		JOIN indexsystem i on d.indexID=i.indexID INNER JOIN
+		plant p on
+		i.plantID=p.plantID
+		INNER JOIN user u on u.userid=d.userID
+		<where>
+			<if test="plantID!=null">
+				i.plantID =#{plantID}
+			</if>
+			order by date DESC
+			<if test="pageNumber!=null and pageSize!=null ">
+				limit #{pageNumber} , #{pageSize}
+			</if>
+		</where>
+	</select>
+
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		datadeal
+		where puid = #{puid,jdbcType=INTEGER}
+	</delete>
+	<delete id="deleteByExample" parameterType="com.xs.coal.pojo.DatadealExample">
+		delete from datadeal
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert" parameterType="com.xs.coal.pojo.Datadeal">
+		insert into datadeal (puid,
+		url, indexID,
+		dataID, indexNumber, userID,
+		time, commandUserID,
+		commandTime,
+		note, command, date,
+		isOver, overNumber, reason
+		)
+		values
+		(#{puid,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR},
+		#{indexid,jdbcType=INTEGER},
+		#{dataid,jdbcType=VARCHAR},
+		#{indexnumber,jdbcType=DOUBLE}, #{userid,jdbcType=VARCHAR},
+		#{time,jdbcType=VARCHAR}, #{commanduserid,jdbcType=VARCHAR},
+		#{commandtime,jdbcType=TIMESTAMP},
+		#{note,jdbcType=VARCHAR},
+		#{command,jdbcType=VARCHAR}, #{date,jdbcType=TIMESTAMP},
+		#{isover,jdbcType=VARCHAR}, #{overnumber,jdbcType=DOUBLE},
+		#{reason,jdbcType=LONGVARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.xs.coal.pojo.Datadeal">
+		insert into datadeal
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="puid != null">
+				puid,
+			</if>
+			<if test="url != null">
+				url,
+			</if>
+			<if test="indexid != null">
+				indexID,
+			</if>
+			<if test="dataid != null">
+				dataID,
+			</if>
+			<if test="indexnumber != null">
+				indexNumber,
+			</if>
+			<if test="userid != null">
+				userID,
+			</if>
+			<if test="time != null">
+				time,
+			</if>
+			<if test="commanduserid != null">
+				commandUserID,
+			</if>
+			<if test="commandtime != null">
+				commandTime,
+			</if>
+			<if test="note != null">
+				note,
+			</if>
+			<if test="command != null">
+				command,
+			</if>
+			<if test="date != null">
+				date,
+			</if>
+			<if test="isover != null">
+				isOver,
+			</if>
+			<if test="overnumber != null">
+				overNumber,
+			</if>
+			<if test="reason != null">
+				reason,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="puid != null">
+				#{puid,jdbcType=INTEGER},
+			</if>
+			<if test="url != null">
+				#{url,jdbcType=VARCHAR},
+			</if>
+			<if test="indexid != null">
+				#{indexid,jdbcType=INTEGER},
+			</if>
+			<if test="dataid != null">
+				#{dataid,jdbcType=VARCHAR},
+			</if>
+			<if test="indexnumber != null">
+				#{indexnumber,jdbcType=DOUBLE},
+			</if>
+			<if test="userid != null">
+				#{userid,jdbcType=VARCHAR},
+			</if>
+			<if test="time != null">
+				#{time,jdbcType=VARCHAR},
+			</if>
+			<if test="commanduserid != null">
+				#{commanduserid,jdbcType=VARCHAR},
+			</if>
+			<if test="commandtime != null">
+				#{commandtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="note != null">
+				#{note,jdbcType=VARCHAR},
+			</if>
+			<if test="command != null">
+				#{command,jdbcType=VARCHAR},
+			</if>
+			<if test="date != null">
+				#{date,jdbcType=TIMESTAMP},
+			</if>
+			<if test="isover != null">
+				#{isover,jdbcType=VARCHAR},
+			</if>
+			<if test="overnumber != null">
+				#{overnumber,jdbcType=DOUBLE},
+			</if>
+			<if test="reason != null">
+				#{reason,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<select id="countByExample" parameterType="com.xs.coal.pojo.DatadealExample"
+		resultType="java.lang.Integer">
+		select count(*) from datadeal
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update datadeal
+		<set>
+			<if test="record.puid != null">
+				puid = #{record.puid,jdbcType=INTEGER},
+			</if>
+			<if test="record.url != null">
+				url = #{record.url,jdbcType=VARCHAR},
+			</if>
+			<if test="record.indexid != null">
+				indexID = #{record.indexid,jdbcType=INTEGER},
+			</if>
+			<if test="record.dataid != null">
+				dataID = #{record.dataid,jdbcType=VARCHAR},
+			</if>
+			<if test="record.indexnumber != null">
+				indexNumber = #{record.indexnumber,jdbcType=DOUBLE},
+			</if>
+			<if test="record.userid != null">
+				userID = #{record.userid,jdbcType=VARCHAR},
+			</if>
+			<if test="record.time != null">
+				time = #{record.time,jdbcType=VARCHAR},
+			</if>
+			<if test="record.commanduserid != null">
+				commandUserID = #{record.commanduserid,jdbcType=VARCHAR},
+			</if>
+			<if test="record.commandtime != null">
+				commandTime = #{record.commandtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.note != null">
+				note = #{record.note,jdbcType=VARCHAR},
+			</if>
+			<if test="record.command != null">
+				command = #{record.command,jdbcType=VARCHAR},
+			</if>
+			<if test="record.date != null">
+				date = #{record.date,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.isover != null">
+				isOver = #{record.isover,jdbcType=VARCHAR},
+			</if>
+			<if test="record.overnumber != null">
+				overNumber = #{record.overnumber,jdbcType=DOUBLE},
+			</if>
+			<if test="record.reason != null">
+				reason = #{record.reason,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExampleWithBLOBs" parameterType="map">
+		update datadeal
+		set puid = #{record.puid,jdbcType=INTEGER},
+		url =
+		#{record.url,jdbcType=VARCHAR},
+		indexID =
+		#{record.indexid,jdbcType=INTEGER},
+		dataID =
+		#{record.dataid,jdbcType=VARCHAR},
+		indexNumber =
+		#{record.indexnumber,jdbcType=DOUBLE},
+		userID =
+		#{record.userid,jdbcType=VARCHAR},
+		time =
+		#{record.time,jdbcType=VARCHAR},
+		commandUserID =
+		#{record.commanduserid,jdbcType=VARCHAR},
+		commandTime =
+		#{record.commandtime,jdbcType=TIMESTAMP},
+		note =
+		#{record.note,jdbcType=VARCHAR},
+		command =
+		#{record.command,jdbcType=VARCHAR},
+		date =
+		#{record.date,jdbcType=TIMESTAMP},
+		isOver =
+		#{record.isover,jdbcType=VARCHAR},
+		overNumber =
+		#{record.overnumber,jdbcType=DOUBLE},
+		reason =
+		#{record.reason,jdbcType=LONGVARCHAR}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update datadeal
+		set puid = #{record.puid,jdbcType=INTEGER},
+		url =
+		#{record.url,jdbcType=VARCHAR},
+		indexID =
+		#{record.indexid,jdbcType=INTEGER},
+		dataID =
+		#{record.dataid,jdbcType=VARCHAR},
+		indexNumber =
+		#{record.indexnumber,jdbcType=DOUBLE},
+		userID =
+		#{record.userid,jdbcType=VARCHAR},
+		time =
+		#{record.time,jdbcType=VARCHAR},
+		commandUserID =
+		#{record.commanduserid,jdbcType=VARCHAR},
+		commandTime =
+		#{record.commandtime,jdbcType=TIMESTAMP},
+		note =
+		#{record.note,jdbcType=VARCHAR},
+		command =
+		#{record.command,jdbcType=VARCHAR},
+		date =
+		#{record.date,jdbcType=TIMESTAMP},
+		isOver =
+		#{record.isover,jdbcType=VARCHAR},
+		overNumber =
+		#{record.overnumber,jdbcType=DOUBLE}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective" parameterType="com.xs.coal.pojo.Datadeal">
+		update datadeal
+		<set>
+			<if test="url != null">
+				url = #{url,jdbcType=VARCHAR},
+			</if>
+			<if test="indexid != null">
+				indexID = #{indexid,jdbcType=INTEGER},
+			</if>
+			<if test="dataid != null">
+				dataID = #{dataid,jdbcType=VARCHAR},
+			</if>
+			<if test="indexnumber != null">
+				indexNumber = #{indexnumber,jdbcType=DOUBLE},
+			</if>
+			<if test="userid != null">
+				userID = #{userid,jdbcType=VARCHAR},
+			</if>
+			<if test="time != null">
+				time = #{time,jdbcType=VARCHAR},
+			</if>
+			<if test="commanduserid != null">
+				commandUserID = #{commanduserid,jdbcType=VARCHAR},
+			</if>
+			<if test="commandtime != null">
+				commandTime = #{commandtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="note != null">
+				note = #{note,jdbcType=VARCHAR},
+			</if>
+			<if test="command != null">
+				command = #{command,jdbcType=VARCHAR},
+			</if>
+			<if test="date != null">
+				date = #{date,jdbcType=TIMESTAMP},
+			</if>
+			<if test="isover != null">
+				isOver = #{isover,jdbcType=VARCHAR},
+			</if>
+			<if test="overnumber != null">
+				overNumber = #{overnumber,jdbcType=DOUBLE},
+			</if>
+			<if test="reason != null">
+				reason = #{reason,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where puid = #{puid,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs" parameterType="com.xs.coal.pojo.Datadeal">
+		update
+		datadeal
+		set url = #{url,jdbcType=VARCHAR},
+		indexID =
+		#{indexid,jdbcType=INTEGER},
+		dataID = #{dataid,jdbcType=VARCHAR},
+		indexNumber = #{indexnumber,jdbcType=DOUBLE},
+		userID =
+		#{userid,jdbcType=VARCHAR},
+		time = #{time,jdbcType=VARCHAR},
+		commandUserID = #{commanduserid,jdbcType=VARCHAR},
+		commandTime =
+		#{commandtime,jdbcType=TIMESTAMP},
+		note = #{note,jdbcType=VARCHAR},
+		command = #{command,jdbcType=VARCHAR},
+		date =
+		#{date,jdbcType=TIMESTAMP},
+		isOver = #{isover,jdbcType=VARCHAR},
+		overNumber = #{overnumber,jdbcType=DOUBLE},
+		reason =
+		#{reason,jdbcType=LONGVARCHAR}
+		where puid = #{puid,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.xs.coal.pojo.Datadeal">
+		update datadeal
+		set url = #{url,jdbcType=VARCHAR},
+		indexID =
+		#{indexid,jdbcType=INTEGER},
+		dataID = #{dataid,jdbcType=VARCHAR},
+		indexNumber = #{indexnumber,jdbcType=DOUBLE},
+		userID =
+		#{userid,jdbcType=VARCHAR},
+		time = #{time,jdbcType=VARCHAR},
+		commandUserID = #{commanduserid,jdbcType=VARCHAR},
+		commandTime =
+		#{commandtime,jdbcType=TIMESTAMP},
+		note = #{note,jdbcType=VARCHAR},
+		command = #{command,jdbcType=VARCHAR},
+		date =
+		#{date,jdbcType=TIMESTAMP},
+		isOver = #{isover,jdbcType=VARCHAR},
+		overNumber = #{overnumber,jdbcType=DOUBLE}
+		where puid =
+		#{puid,jdbcType=INTEGER}
+	</update>
+</mapper>
