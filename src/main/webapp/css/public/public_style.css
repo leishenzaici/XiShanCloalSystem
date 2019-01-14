@@ -1,0 +1,316 @@
+/*闁氨鏁ら崠锟�*/
+.ztree{
+	width:230px !important;
+ 	height:580px !important;
+ 	overflow-y:auto !important;
+ 	overflow-x:auto !important;
+ 	border-right:1px dotted #ddd !important;
+ 	border-top:1px dotted #ddd !important;
+ 	margin-right:30px !important;
+}
+.paginationID{
+	font-size:13px;
+	width:auto !important;
+	margin:0;
+}
+.paginationID table{
+	margin-right:30px!important;
+}
+.table{
+	font-size:13px;
+}
+
+*{
+    padding:0;
+    margin:0;
+    font-family:"鐎瑰缍�";
+}
+.success{
+    cursor:pointer;
+}
+.error{
+	color:red;
+	font-size:13px  !important;
+}
+.el_Mainmain{
+	padding-bottom:50px;
+}
+/*
+ * 缁崵绮虹粻锛勬倞 > 閺夊啴妾虹粻锛勬倞
+ */
+/*
+缁便垹绱╅崘鍛啇
+*/
+.el_queryBox {
+    width: 100%;
+    height: auto;
+    border-bottom: 1px solid #ddd;
+    position: relative;
+    padding-bottom:10px;
+    margin:0 auto;
+    margin-top:10px;
+}
+
+/* 閺屻儴顕楅敍灞剧缁岀儤瀵滈柦锟� */
+.el_queryButton {
+    position: absolute;
+    right: 70px;
+    bottom: 10px;
+}
+.el_queryButton0{
+    position: absolute;
+    right: 20px;
+    bottom: 10px;
+}
+
+.form-control {
+    height: 25px;
+    border-radius: 3px;
+    width: 350px;
+    font-size: 12px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+}
+/*閹兼粎鍌ㄧ悰锟�*/
+.el_queryBoxrow{
+    height:35px;
+    line-height:35px;
+    padding-top:0;
+    padding-bottom:0;
+    clear:both;
+}
+/*閹兼粎鍌ㄦ潏瑙勵攱*/
+.el_queryBoxrow .el_qlmQuery {
+    min-width: 230px;
+    width: 25%;
+    float: left;
+    margin: 0 10px;
+    position:relative;
+}
+/*span閺�鐟板綁閺嶅嘲绱￠崥搴ｆ畱閺嶅嘲鐡�*/
+.el_spans {
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: normal;
+    line-height: 1;
+    color: #555;
+    text-align: center;
+    width: 1%;
+    white-space: nowrap;
+    vertical-align: middle;
+    display: table-cell;
+}
+/*閸楁洟锟藉顢嬮惃鍒瞐bel*/
+.el_radioBox{
+    margin-right:10px;
+}
+.el_qlmQuery label{
+    font-size:13px;
+}
+.el_qlmQueryR{
+    min-width:250px;
+}
+
+/*
+閺嶅洭顣�
+*/
+.el_mainHead {
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+    padding-bottom:20px;
+    margin-bottom:0;
+    border-bottom: 1px solid #ddd;
+    font-size:15px;
+}
+
+/*
+娑撴槒顩﹂柈銊ュ瀻
+*/
+.el_main {
+    height: auto;
+    width: 100%;
+    padding-bottom:20px;
+}
+.panel{
+    box-shadow:none;
+}
+.panel-body{
+    border:none;
+}
+
+/*
+閹稿鎸抽幙宥勭稊
+*/
+.el_topButton {
+    height: 50px;
+    margin-top: 0px;
+}
+.el_topButton button {
+    margin-right: 20px;
+    font-size:13px;
+}
+
+.el_delButton:hover {
+    cursor: pointer;
+}
+/*閺堝鎽奸幒銉ф畱閹稿鎸�*/
+.el_topButton a {
+    text-decoration:none;
+    color:white;
+}
+.el_topButton a:hover{
+    background:none;
+}
+
+/*
+瀹革缚鏅堕惃鍕埐
+*/
+.el_leftTree{
+    width:15%;
+    float:left;
+} 
+.el_treeTitle{
+    display: block;
+    font-size:15px;
+    padding:20px;
+    padding-bottom:0;
+}
+ul.ztree {
+    width: 100%;
+    background-color: white;
+    height: auto;
+    border:0;
+    padding-bottom:30px;
+    text-align:center;
+}
+/*閺嶆垹娈戠亸蹇庣瑏鐟欙拷*/
+.el_smallTriangle {
+    position: absolute;
+    right: 6px;
+    top: 10px;
+    z-index: 20;
+}
+/*
+閸欏厖鏅堕崘鍛啇
+*/
+.el_qlmContent{
+    width:75%;
+    float:right;
+    font-size:15px;
+}
+/*鐞涖劍鐗搁崢濠氭珟a閺嶅洨顒烽惃鍕瑓閸掓帞鍤�*/
+.table a{
+    text-decoration:none;
+    color:darkblue;
+    padding:2px 6px;
+}
+.table a:hover{
+    background-color:rgb(250,250,250);
+    color:dodgerblue;
+}
+
+
+/*閸掑棝銆�*/
+#paginationID{
+    color:black;
+    height:51px;
+    background-color:white;
+    padding:8px;
+    float:left;
+}
+#paginationID table{
+    position:relative;
+    top:-10px;
+}
+#paginationID table tbody tr:first-child td:nth-child(2){
+    position:relative;
+    top:10px;
+}
+
+/* 妫版ê绨遍敍宀冪槸妫帮拷,閹存劗鍝楃粻锛勬倞娑擃厾娈戦崚鍡涖�� */
+#questionLib_paginationIDU table,
+#employeeGradeManage_paginationIDU table,
+#gradeManage_paginationIDU table,
+#paginationIDU2 table,
+#paginationIDU3 table,
+#examInterface_paginationIDU table,
+#paginationID2 table,
+#questions_paginationIDU table{
+    position:relative;
+    top:-10px;
+}
+#questionLib_paginationIDU table tbody tr:first-child td:nth-child(2),
+#paginationID2 table tbody tr:first-child td:nth-child(2),
+#examInterface_paginationIDU table tbody tr:first-child td:nth-child(2),
+#paginationIDU2 table tbody tr:first-child td:nth-child(2),
+#paginationIDU3 table tbody tr:first-child td:nth-child(2),
+#employeeGradeManage_paginationIDU table tbody tr:first-child td:nth-child(2),
+#gradeManage_paginationIDU table tbody tr:first-child td:nth-child(2),
+#questions_paginationIDU table tbody tr:first-child td:nth-child(2){
+    position:relative;
+    top:10px;
+}
+
+#paginationIDM{
+    color:black;
+    height:51px;
+    background-color:white;
+    padding:8px;
+}
+.pagination-link{
+    border:1px solid #ccc;
+}
+
+/*閸掑棝銆�*/
+#paginationIDU{
+    color:black;
+    height:51px;
+    background-color:white;
+    padding:8px;
+    float:left;
+}
+.pagination-link{
+    border:1px solid #ccc;
+}
+#paginationIDU table{
+    position:relative;
+    top:-10px;
+}
+#paginationIDU table tbody tr:first-child td:nth-child(2){
+    position:relative;
+    top:10px;
+}
+
+
+/*
+濡剝锟戒焦顢嬫稉顓犳畱閸愬懎顔�
+*/
+.el_modellist {
+    margin: 10px;
+    margin-bottom: 15px;
+    width: 400px;
+}
+.el_modelinput {
+    width: 200px;
+}
+/*缁便垹绱╂稉顓犳畱娑撳濯哄锟�*/
+.selectpicker {
+    padding: 0;
+    padding-left: 10px;
+}
+/*閺屻儳婀呴弶鍐閿涘矁顫楅懝鑼畱鐠囷妇绮忔穱鈩冧紖*/
+.el_AuthInfo {
+    width: 100%;
+}
+.el_AuthInfo th, .el_AuthInfo td {
+    width: 50%;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    border: 1px solid #ccc;
+}
+/*閸楁洟锟藉瀵滈柦顔炬畱鐎涙ぞ缍嬫径褍鐨�*/
+.el_modellist  label{
+    font-size:13px;
+}

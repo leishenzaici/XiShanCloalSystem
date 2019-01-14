@@ -1,0 +1,17 @@
+/*鍏充簬琛ㄦ牸鐨勬帓搴忓姛鑳藉拰绛涢�夋鐨勬牱寮�*/
+/*琛ㄥご涓婁笅鍥剧墖鐨勫ぇ灏�*/
+#tableSort img {
+	width: 14px;
+	height: 14px;
+}
+/*绛涢�夋鐨勬牱寮�*/
+.condition table {
+	/*width: 99%;  */
+	margin: 0 5px;
+}
+/*绛涢�夋鐨勬牱寮�*/
+.condition p {
+	margin-top: 10px;
+	margin-left: 30px;
+	font-size: 14px;
+}

@@ -1,0 +1,53 @@
+/*琛ㄦ牸鐨勬晥鏋�*/
+.jumbotron{
+	background-color: #fff;
+}
+.jumbotron table{
+	width: 97%;
+	margin: 0px 30px;
+	text-align:center;
+}
+.jumbotron table th{
+	text-align:center;
+}
+.jumbotron h1{
+	margin-left: 30px;
+	margin-top: -10px;
+	margin-bottom: 20px;
+	font-size: 36px;
+}
+.jumbotron .ilable{
+	margin-left: 30px;
+	margin-top: -10px;
+	margin-bottom: 20px;
+	font-size: 20px;
+}
+.jumbotron .ibutton{
+	margin-left: 50px;
+	margin-top: -10px;
+	margin-bottom: 20px;
+	font-size: 20px;
+}
+.jumbotron .rebtn{
+	margin-left: 30px;
+	margin-top: -10px;
+	margin-bottom: 20px;
+	font-size: 36px;
+}
+.jumbotron p{
+	margin-top: 10px;
+	margin-left: 30px;
+	font-size: 14px;
+}
+.tab-head{
+	background-color: #F1F2F7;
+}
+nav{
+	margin-top: -20px;
+	margin-left: 30px;
+}
+th{
+	background-color: #2b6699;
+	color: #FFFFFF;
+}
+

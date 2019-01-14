@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<!-- "系统管理--分厂管理"的页面 -->
+<html>
+<head>
+<!-- 编码方式 -->
+<meta charset="utf-8">
+<!-- 适配各种频幕 -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- 标题 -->
+<title>个人设置</title>
+<!-- Bootstrap CSS -->
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<!-- 关于表格的css，自己定义的css -->
+<link href="css/table.css" rel="stylesheet">
+<!-- 关于弹出框的css，自己定义的css -->
+<link href="css/popOut.css" rel="stylesheet">
+</head>
+<body>
+	<div class='demo'>
+		<div class="jumbotron">
+			<!--未弹出对话框之前显示的界面-->
+			<div style="width: 80%; margin-left: 10%;">
+				<!-- 标题 -->
+				<h2>个人设置</h2>
+				<!-- 标题下面一个表格 -->
+				<hr />
+				<div class="form-group row form-inline">
+					<label class="col-sm-3">用户名</label> <input class="form-control"
+						type="text" style="display: inline-block;">
+				</div>
+				<div class="form-group row form-inline">
+					<label class="col-sm-3">姓名</label> <input class="form-control"
+						type="text" style="display: inline-block;">
+				</div>
+				<div class="form-group row form-inline">
+
+					<label class="col-sm-3">所属分厂</label> <label class="radio-inline">
+						<input name="factory" type="radio" value="1">一分厂
+					</label> <label class="radio-inline"> <input name="factory"
+						type="radio" value="2">二分厂
+					</label> <label class="radio-inline"> <input name="factory"
+						type="radio" value="3">三分厂
+					</label> <label class="radio-inline"> <input name="factory"
+						type="radio" value="4">四分厂
+					</label> <label class="radio-inline"> <input name="factory"
+						type="radio" value="5">五分厂
+					</label>
+				</div>
+				<div class="form-group row form-inline">
+					<label class="col-sm-3">邮箱</label> <input class="form-control"
+						type="text" style="display: inline-block;">
+				</div>
+				<div class="form-group row">
+					<label class="col-sm-3">状态</label> <label class="radio-inline">
+						<input name="status" type="radio" value="0">正常
+					</label> <label class="radio-inline"> <input name="status"
+						type="radio" value="1">禁用
+					</label>
+				</div>
+				<div class="form-group row">
+					<label class="col-sm-3">角色</label> <label class="radio-inline">
+						<input name="role" type="radio" value="0">管理员
+					</label> <label class="radio-inline"> <input name="role"
+						type="radio" value="0">普通用户
+					</label> <label class="radio-inline"> <input name="role"
+						type="radio" value="0">超级用户
+					</label>
+				</div>
+				<button class="btn btn-primary" onclick="openDialog()">修改</button>
+				<a href="home.html"><button class="btn btn-primary">返回</button></a>
+			</div>
+
+		</div>
+		<div class='demo-bg'></div>
+		<!--弹出框的内容在下面这个div里增加即可,写个z-tree吧-->
+		<div class='demo-txt'>
+			<button id="btn" class="btn" onclick="closeDialog()">关闭</button>
+			<div style="width: 80%; margin-left: 10%;">
+				<h2>个人设置</h2>
+				<!-- 标题下面一个表格 -->
+				<hr />
+				<div class="form-group row form-inline">
+					<label class="col-sm-3">用户名</label> <input class="form-control"
+						type="text" style="display: inline-block;">
+				</div>
+				<div class="form-group row form-inline">
+					<label class="col-sm-3">姓名</label> <input class="form-control"
+						type="text" style="display: inline-block;">
+				</div>
+				<div class="form-group row form-inline">
+					<label class="col-sm-3">所属分厂</label> <label class="radio-inline">
+						<input name="factory" type="radio" value="1">一分厂
+					</label> <label class="radio-inline"> <input name="factory"
+						type="radio" value="2">二分厂
+					</label> <label class="radio-inline"> <input name="factory"
+						type="radio" value="3">三分厂
+					</label> <label class="radio-inline"> <input name="factory"
+						type="radio" value="4">四分厂
+					</label> <label class="radio-inline"> <input name="factory"
+						type="radio" value="5">五分厂
+					</label>
+				</div>
+				<div class="form-group row form-inline">
+					<label class="col-sm-3">邮箱</label> <input class="form-control"
+						type="text" style="display: inline-block;">
+				</div>
+				<div class="form-group row">
+					<label class="col-sm-3">状态</label> <label class="radio-inline">
+						<input name="status" type="radio" value="0">正常
+					</label> <label class="radio-inline"> <input name="status"
+						type="radio" value="1">禁用
+					</label>
+				</div>
+				<div class="form-group row">
+					<label class="col-sm-3">角色</label> <label class="radio-inline">
+						<input name="role" type="radio" value="0">管理员
+					</label> <label class="radio-inline"> <input name="role"
+						type="radio" value="0">普通用户
+					</label> <label class="radio-inline"> <input name="role"
+						type="radio" value="0">超级用户
+					</label>
+				</div>
+				<button class="btn btn-primary">提交</button>
+			</div>
+		</div>
+		<script>
+			var demobg = document.querySelector(".demo-bg");
+			var demotxt = document.querySelector(".demo-txt");
+			function openDialog() {
+				demotxt.style.display = "block";
+				demobg.style.display = "block";
+			}
+			function closeDialog() {
+				demotxt.style.display = "none";
+				demobg.style.display = "none";
+			}
+		</script>
+</body>
+</html>

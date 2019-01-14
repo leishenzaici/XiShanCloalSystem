@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<!-- 中文语言 -->
+<html lang="zh-CN">
+<head>
+<!-- 编码方式 -->
+<meta charset="utf-8">
+<!-- 标题 -->
+<title>西山煤电系统菜单</title>
+<!-- 导入elegant样式库 -->
+<link rel="stylesheet" href="css/elegant-icons-style.css">
+<!-- Bootstrap CSS -->
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-theme.css" rel="stylesheet">	
+<!-- 导入jQuery -->
+<script src="js/jquery-1.11.3.min.js"></script>
+<!-- 自己定义的js，用来实现列表功能 -->
+<script type="text/javascript">
+$(function(){ 
+	$('.list .show dd').show('slow');	
+    $('.list dl dt').click(function(){
+		if($(this).hasClass('la')){
+			$(this).parent('dl').children('dd').slideUp();
+			$(this).css({background:'url(images/icon.png) no-repeat 0 -56px' }); 
+			$(this).removeClass("la");              
+		} else {
+			$(this).parent('dl').children('dd').slideDown();
+			$(this).css({background:'url(images/icon.png) no-repeat 0 -86px'}); 
+			$(this).addClass("la");              
+		}
+		})
+    });
+    //侧边栏箭头的jQuery
+	$(function() {
+				$("#list dt").click(function() {
+			$("#list dt").removeClass("active");
+					$(this).addClass("active");
+			$(this).children(".glyphicon").toggleClass("glyphicon-menu-right glyphicon-menu-down");
+				})
+			})
+</script>
+<!-- 自己定义的样式集 -->
+<style type="text/css">
+@charset "utf-8";
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+div#menu {
+	width: 200px;
+	float: left;
+}
+
+div#content {
+	background-color: #379846;
+	float: left;
+}
+
+#menu {
+	font: 16px Verdana, Geneva, sans-serif;
+	background-color: #F5F5F5;
+}
+
+h1 {
+	letter-spacing: 2px;
+	width: 200px;
+	font-size: 20px;
+	color: white;
+	text-align: center;
+	margin: 17px 0px;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+.list dl {
+	font-size: 16px;
+	line-height: 200%;
+	font-weight: normal;
+	cursor: pointer;
+	background-color: #F5F5F5;
+	border-bottom: 1px solid #CCCCCC;
+}
+
+.list dl dt {
+	color: black;
+	padding: 3px 0px 3px 20px;
+}
+
+.arrow {
+	float: right;
+	padding-right: 20px;
+}
+
+.list dl dt i {
+	margin-right: 10px;
+}
+
+.list dl dd {
+	padding: 3px 0px 3px 40px;
+	display: none;
+	font-size: 14px;
+	background-color: #FFFFFF;
+}
+
+.list a {
+	color: black;
+}
+#menu div img{
+	display: inline-block;
+	width: 20%;
+	height: 20%;
+	margin: 0 3px;
+}
+.glyphicon{
+	float: right;
+}
+/*#list dt.active .glyphicon-menu-right{
+	transform: rotate(90deg);
+}*/
+</style>
+</head>
+<!-- 主体，定个颜色 -->
+<body>
+	<!-- 整个menudiv充满body -->
+	<div id="menu" class="aside">
+		<!-- 标题 -->
+		<!-- <div style="margin-top: 16px;">
+			<a href="me.html" target="right" style="color: #000000;">
+				<img src="imgs/person.jpg" class="img-circle img-responsive" alt="Responsive image">
+				<small>个人信息</small>
+			</a>
+		</div> -->
+		<!-- 一条线 -->
+		<hr>
+		<!-- 宽度是200 -->
+		<div style="width: 200px" class="list" id="list">
+			<!-- 第一个列表，为了点击一个只展开一个，所以多定义几个列表 -->
+			<dl>
+				<!-- 主页的列表头 -->
+				<dt>
+					<i class="icon_house"></i>主页<i class="glyphicon glyphicon-menu-right"></i>
+				</dt>
+				<!-- 主页的列表项，一个链接 -->
+				<dd>
+					<a href="home.html" target="right">了解煤电系统</a>
+				</dd>
+			</dl>
+			<!-- 第二个列表 -->
+			<dl>
+				<!-- 数据管理，头标签 -->
+				<dt>
+					<i class="icon_datareport_alt"></i>数据管理<i class="glyphicon glyphicon-menu-right"></i>
+				</dt>
+				<!-- 数据管理的各个子模块，列表项 -->
+				<dd>
+					<a href="dataManage/showData.html" target="right">查看数据</a>
+				</dd>
+				<dd>
+					<a href="dataManage/inputData.html" target="right">录入数据</a>
+				</dd>
+				<dd>
+					<a href="dataManage/manageData.html" target="right">管理数据</a>
+				</dd>
+				<dd>
+					<a href="dataManage/alarmMag.html" target="right">预警设置</a>
+				</dd>
+				<dd>
+					<a href="dataManage/manageIndex.html" target="right">指标管理</a>
+				</dd>
+				<dd>
+					<a href="dataManage/reportMag.html" target="right">报告单管理</a>
+				</dd>
+				<dd>
+					<a href="dataManage/manageReport.html" target="right">报告管理</a>
+				</dd>
+				<dd>
+					<a href="dataManage/analysis.html" target="right">相关性分析</a>
+				</dd>
+			</dl>
+			<!-- 第三个列表 -->
+			<dl>
+			    <!-- 系统管理，头标签 -->
+				<dt>
+					<i class="icon_clipboard"></i>系统管理<i class="glyphicon glyphicon-menu-right"></i>
+				</dt>
+				<!-- 系统管理的各个子模块，列表项 -->
+				<dd>
+					<a href="osManage/userMag.html" target="right">用户管理</a>
+				</dd>
+				<dd>
+					<a href="osManage/roleMag.html" target="right">角色管理</a>
+				</dd>
+				<dd>
+					<a href="osManage/factoryMag.html" target="right">分厂管理</a>
+				</dd>
+			</dl>
+			<!-- 第四个列表 -->
+			<dl>
+			    <!-- 系统监控，头标签 -->
+				<dt>
+					<i class="icon_easel_alt"></i>系统监控<i class="glyphicon glyphicon-menu-right"></i>
+				</dt>
+				<!-- 系统监控的各个子模块，列表项 -->
+				<dd>
+					<a href="osMonitor/onlineUser.html" target="right">在线用户</a>
+				</dd>
+				<dd>
+					<a href="osMonitor/systemLog.html" target="right">系统日志</a>
+				</dd>
+			</dl>
+			<!-- 第五个列表 -->
+			<dl>
+			    <!-- 就一个标签，头标签，同时也是个链接 -->
+				<dt>
+					<i class="icon_cloud_alt"></i><a href="our/our.html"
+						target="right">关于我们</a>
+				</dt>
+			</dl>
+		</div>
+	</div>
+</body>
+</html>

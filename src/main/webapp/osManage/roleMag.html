@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<!-- "系统管理--角色管理"的页面 -->
+<html>
+<head>
+<!-- 编码方式 -->
+<meta charset="utf-8">
+<!-- 适配各种频幕 -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- 标题 -->
+<title>角色管理</title>
+<!-- Bootstrap CSS -->
+<link href="../css/bootstrap.css" rel="stylesheet">
+<link href="../css/bootstrap.min.css" rel="stylesheet">
+<!-- 关于表格的css，自己定义的css -->
+<link href="../css/table.css" rel="stylesheet">
+<!-- 关于弹出框的css，自己定义的css -->
+<link href="../css/popOut.css" rel="stylesheet">
+<!-- 引入jQuery支持库，ztree会用到 -->
+<script type="text/javascript" src="../js/jquery-1.11.3.min.js"></script>
+<!--引入模态框需要的js-->
+<script src="../js/bootstrap.js"></script>
+<!-- 引入zTree的官方css文件 -->
+<link href="../css/zTreeStyle.css" rel="stylesheet">
+<!-- 引入zTree的官方js文件 -->
+<script type="text/javascript" src="../js/jquery.ztree.core.js"></script>
+<script type="text/javascript" src="../js/jquery.ztree.excheck.js"></script>
+<!-- zTree的样式，zTree部分的框 -->
+<style type="text/css">
+ul.ztree {
+	margin-top: 10px;
+	margin-left: 20px;
+	border: 1px solid #617775;
+	background: #f0f6e4;
+	width: 220px;
+	height: 250px;
+	overflow-y: scroll;
+	overflow-x: auto;
+}
+</style>
+<!-- 本页面zTree的内容 -->
+<script type="text/javascript">
+	var setting = {
+		check : {
+			enable : true
+		},
+		data : {
+			simpleData : {
+				enable : true
+			}
+		}
+	};
+
+	var zNodes = [ {
+		id : 1,
+		pId : 0,
+		name : "数据管理",
+		open : true
+	}, {
+		id : 11,
+		pId : 1,
+		name : "查看数据",
+	}, {
+		id : 12,
+		pId : 1,
+		name : "录入数据",
+	}, {
+		id : 13,
+		pId : 1,
+		name : "管理数据",
+	}, {
+		id : 14,
+		pId : 1,
+		name : "预警设置",
+	}, {
+		id : 2,
+		pId : 0,
+		name : "系统管理",
+		open : true
+	}, {
+		id : 21,
+		pId : 2,
+		name : "用户管理",
+	}, {
+		id : 22,
+		pId : 2,
+		name : "角色管理",
+	}, {
+		id : 23,
+		pId : 2,
+		name : "分厂管理",
+	}, {
+		id : 3,
+		pId : 0,
+		name : "系统监控",
+		open : true
+	}, {
+		id : 31,
+		pId : 3,
+		name : "在线用户",
+	}, {
+		id : 32,
+		pId : 3,
+		name : "系统日志",
+	} ];
+
+	var code;
+
+	function setCheck() {
+		var zTree = $.fn.zTree.getZTreeObj("treeDemo"), py = $("#py").attr(
+				"checked") ? "p" : "", sy = $("#sy").attr("checked") ? "s" : "", pn = $(
+				"#pn").attr("checked") ? "p" : "", sn = $("#sn")
+				.attr("checked") ? "s" : "", type = {
+			"Y" : py + sy,
+			"N" : pn + sn
+		};
+		zTree.setting.check.chkboxType = {
+			"Y" : "ps",
+			"N" : "ps"
+		};
+		showCode('setting.check.chkboxType = { "Y" : "' + type.Y + '", "N" : "'
+				+ type.N + '" };');
+	}
+	function showCode(str) {
+		if (!code)
+			code = $("#code");
+		code.empty();
+		code.append("<li>" + str + "</li>");
+	}
+
+	$(document).ready(function() {
+		$.fn.zTree.init($("#treeDemo"), setting, zNodes);
+		setCheck();
+		$("#py").bind("change", setCheck);
+		$("#sy").bind("change", setCheck);
+		$("#pn").bind("change", setCheck);
+		$("#sn").bind("change", setCheck);
+	});
+</script>
+</head>
+<body>
+	<!-- 模态框（Modal） -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">×</button>
+					<h2 class="modal-title" id="myModalLabel">角色密码重置</h2>
+				</div>
+				<div class="modal-body">
+					<div class="form-group row form-inline">
+						<label class="col-sm-4">请输入原密码：</label> <input
+							class="form-control" type="text" style="display: inline-block;">
+					</div>
+					<div class="form-group row form-inline">
+						<label class="col-sm-4">请输入新密码：</label> <input
+							class="form-control" type="text" style="display: inline-block;">
+					</div>
+					<div class="form-group row form-inline">
+						<label class="col-sm-4">请再次输入新密码：</label> <input
+							class="form-control" type="text" style="display: inline;">
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+					</button>
+					<button type="button" class="btn btn-primary">提交</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
+	<!-- 标题 -->
+	<div style="background-color: #c2c2c2; padding: 2PX;">
+		<h4>&nbsp;&nbsp;&nbsp;&nbsp;角色管理</h4>
+	</div>
+	<div class='demo'>
+		<div class="jumbotron">
+			<!--未弹出对话框之前显示的界面-->
+			<!-- 标题下面一个表格 -->
+			<table class="table table-hover table-bordered">
+				<!-- 第一行，一系列属性 -->
+				<tr class="tab-head">
+					<th><input type="checkbox"></th>
+					<th>序号</th>
+					<th>角色名</th>
+					<th>权限</th>
+					<th>备注</th>
+					<th>操作</th>
+				</tr>
+				<!-- 第二行，一些写死的数据，后面是根据传入数据进行输出，此处应有jsp代码 -->
+				<tr>
+					<td><input type="checkbox"></td>
+					<td>001</td>
+					<td>管理员</td>
+					<td>拥有部分权限</td>
+					<td></td>
+					<td><button class="btn btn-info btn-sm" onclick="openDialog()">编辑</button>&nbsp;
+						<button class="btn btn-info btn-sm" data-toggle="modal"
+							data-target="#myModal">密码重置</button></td>
+				</tr>
+				<!-- 第三行，一些写死的数据，后面是根据传入数据进行输出，此处应有jsp代码 -->
+				<tr>
+					<td><input type="checkbox"></td>
+					<td>001</td>
+					<td>管理员</td>
+					<td>拥有部分权限</td>
+					<td></td>
+					<td><button class="btn btn-info btn-sm" onclick="openDialog()">编辑</button>&nbsp;
+						<button class="btn btn-info btn-sm" data-toggle="modal"
+							data-target="#myModal">密码重置</button></td>
+				</tr>
+			</table>
+			<!-- 两个按钮 -->
+			<p>
+				<a href="addRole.html"><button class="btn btn-warning btn-sm">添加角色</button></a>
+				<button class="btn btn-warning btn-sm">全部删除</button>
+				<!-- 这里也是写死的数据，后期从后台获取数据，写jsp代码 -->
+				<span style="font-size: 14px;">&nbsp;&nbsp;&nbsp;显示第1条到第2条记录，总共2条记录</span>
+			</p>
+			<!--分页功能-->
+			<nav aria-label="Page navigation">
+				<!-- 分页插件 -->
+				<ul class="pagination">
+					<!-- 前部符号 -->
+					<li><a href="#" aria-label="Previous"> <span
+							aria-hidden="true">&laquo;</span>
+					</a></li>
+					<!-- 中间每一页，后期根据后台数据修改 -->
+					<li><a href="#">1</a></li>
+					<li><a href="#">2</a></li>
+					<li><a href="#">3</a></li>
+					<li><a href="#">4</a></li>
+					<li><a href="#">5</a></li>
+					<!-- 后部符号 -->
+					<li><a href="#" aria-label="Next"> <span
+							aria-hidden="true">&raquo;</span>
+					</a></li>
+				</ul>
+			</nav>
+		</div>
+		<div class='demo-bg'></div>
+		<!--弹出框的内容在下面这个div里增加即可,写个z-tree吧-->
+		<div class='demo-txt'>
+			<button id="btn" class="btn" onclick="closeDialog()">关闭</button>
+			<div style="width: 80%; margin-left: 10%;">
+				<h3>角色修改</h3>
+				<hr />
+				<div class="form-group row form-inline">
+					<label class="col-sm-3">角色</label> <input class="form-control"
+						type="text" style="display: inline-block;">
+				</div>
+				<div class="form-group row form-inline">
+					<label class="col-sm-3">备注</label> <input class="form-control"
+						type="text" style="display: inline-block;">
+				</div>
+				<div class="form-group row form-inline">
+					<label class="col-sm-3">权限</label>
+					<!-- ztree部分 -->
+					<ul id="treeDemo" class="ztree"></ul>
+				</div>
+				<button class="btn btn-primary">提交</button>
+			</div>
+		</div>
+	</div>
+	<script>
+		var demobg = document.querySelector(".demo-bg");
+		var demotxt = document.querySelector(".demo-txt");
+		function openDialog() {
+			demotxt.style.display = "block";
+			demobg.style.display = "block";
+		}
+
+		function closeDialog() {
+			demotxt.style.display = "none";
+			demobg.style.display = "none";
+		}
+	</script>
+</body>
+</html>

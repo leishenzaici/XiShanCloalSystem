@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<!-- "系统管理--报告单管理--已发送管理"的页面 -->
+<html>
+<head>
+<!-- 编码方式 -->
+<meta charset="utf-8">
+<!-- 适配各种频幕 -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- 标题 -->
+<title>已发送管理</title>
+<!-- Bootstrap CSS -->
+<link href="../css/bootstrap.css" rel="stylesheet">
+<link href="../css/bootstrap.min.css" rel="stylesheet">
+<!-- 关于表格的css，自己定义的css -->
+<link href="../css/table.css" rel="stylesheet">
+<!-- 关于弹出框的css，自己定义的css -->
+<link href="../css/popOut.css" rel="stylesheet">
+</head>
+<body>
+	<div class='demo'>
+		<div class="jumbotron">
+			<!--未弹出对话框之前显示的界面-->
+			<!-- 标题 -->
+			<h1>已发送管理</h1>
+			<!-- 返回按钮 -->
+			<a class="rebtn" href="reportMag.html"><button class="btn btn-warning btn-sm">返回</button></a>
+			<!-- 标题下面一个表格 -->
+			<table class="table table-hover table-bordered">
+				<!-- 第一行，一系列属性 -->
+				<tr class="tab-head">
+					<th><input type="checkbox"></th>
+					<th>序号</th>
+					<th>时间</th>
+					<th>发件人</th>
+					<th>主题</th>
+					<th>摘要</th>
+					<th>操作</th>
+				</tr>
+				<!-- 第二行，一些写死的数据，后面是根据传入数据进行输出，此处应有jsp代码 -->
+				<tr>
+					<td><input type="checkbox"></td>
+					<td>001</td>
+					<td>2018年8月23日</td>
+					<td>王五</td>
+					<td>回复一分厂2018年8月23日白班超标说明</td>
+					<td>原因成立，入档保存</td>
+					<td>
+						<button class="btn btn-info btn-sm">删除回复</button>
+					</td>
+				</tr>
+				<!-- 第三行，一些写死的数据，后面是根据传入数据进行输出，此处应有jsp代码 -->
+				<tr>
+					<td><input type="checkbox"></td>
+					<td>002</td>
+					<td>2018年8月24日</td>
+					<td>赵六</td>
+					<td>回复二分厂2018年8月24日夜班超标说明</td>
+					<td>位说明问题，重新提交报告单</td>
+					<td>
+						<button class="btn btn-info btn-sm">删除回复</button>
+					</td>
+				</tr>
+			</table>
+			<!-- 两个按钮 -->
+			<p>
+				<button class="btn btn-warning btn-sm">全部删除</button>
+				<!-- 这里也是写死的数据，后期从后台获取数据，写jsp代码 -->
+				<span style="font-size: 14px;">&nbsp;&nbsp;&nbsp;显示第1条到第2条记录，总共2条记录</span>
+			</p>
+			<!--分页功能-->
+			<nav aria-label="Page navigation">
+				<!-- 分页插件 -->
+				<ul class="pagination">
+					<!-- 前部符号 -->
+					<li><a href="#" aria-label="Previous"> <span
+							aria-hidden="true">&laquo;</span>
+					</a></li>
+					<!-- 中间每一页，后期根据后台数据修改 -->
+					<li><a href="#">1</a></li>
+					<li><a href="#">2</a></li>
+					<li><a href="#">3</a></li>
+					<li><a href="#">4</a></li>
+					<li><a href="#">5</a></li>
+					<!-- 后部符号 -->
+					<li><a href="#" aria-label="Next"> <span
+							aria-hidden="true">&raquo;</span>
+					</a></li>
+				</ul>
+			</nav>
+		</div>
+		<div class='demo-bg'></div>
+		<!--弹出框的内容在下面这个div里增加即可,写个z-tree吧-->
+		<div class='demo-txt'>
+			<button id="btn" class="btn" onclick="closeDialog()">关闭</button>
+			<div style="width: 80%; margin-left: 10%;">
+				<h3>分厂修改</h3>
+				<hr />
+				<div class="form-group row form-inline">
+					<label class="col-sm-3">分厂名</label> <input class="form-control"
+						type="text" style="display: inline-block;">
+				</div>
+				<div class="form-group row form-inline">
+					<label class="col-sm-3">地址</label> <input class="form-control"
+						type="text" style="display: inline-block;">
+				</div>
+				<div class="form-group row form-inline">
+					<label class="col-sm-3">电话</label> <input class="form-control"
+						type="text" style="display: inline-block;">
+				</div>
+				<button class="btn btn-primary">提交</button>
+			</div>
+		</div>
+	</div>
+	<script>
+		var demobg = document.querySelector(".demo-bg");
+		var demotxt = document.querySelector(".demo-txt");
+		function openDialog() {
+			demotxt.style.display = "block";
+			demobg.style.display = "block";
+		}
+		function closeDialog() {
+			demotxt.style.display = "none";
+			demobg.style.display = "none";
+		}
+	</script>
+</body>
+</html>

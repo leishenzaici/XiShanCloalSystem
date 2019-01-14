@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<!-- 系统管理->分厂管理->重置密码 -->
+<html>
+<head>
+<!-- 编码方式 -->
+<meta charset="utf-8">
+<!-- 适配各种频幕 -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- 标题 -->
+<title>reset</title>
+<!-- Bootstrap CSS -->
+<link href="../css/bootstrap.css" rel="stylesheet">
+<link href="../css/bootstrap.min.css" rel="stylesheet">
+<link href="../css/bootstrap-theme.css" rel="stylesheet">
+<script type="text/javascript" src='../js/jquery-1.11.3.min.js'></script>
+<!-- 引入zTree的官方css文件 -->
+<link href="../css/zTreeStyle.css" rel="stylesheet">
+<!-- 引入zTree的官方js文件 -->
+<script type="text/javascript" src="../js/jquery.ztree.core.js"></script>
+<script type="text/javascript" src="../js/jquery.ztree.excheck.js"></script>
+<!-- zTree的样式，zTree部分的框 -->
+<style type="text/css">
+ul.ztree {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	border: 1px solid #617775;
+	background: #ffffff;
+	width: 220px;
+	height: 200px;
+	overflow-y: scroll;
+	overflow-x: auto;
+}
+</style>
+<!-- 本页面zTree的内容 -->
+<script type="text/javascript">
+	var setting = {
+		/* check : {
+			enable : true
+		}, 
+		//这段代码说明了CheckBox是否显示
+		 */
+		data : {
+			simpleData : {
+				enable : true
+			}
+		}
+	};
+
+	var zNodes = [ {
+		id : 1,
+		pId : 0,
+		name : "选择单位",
+		open : true
+	}, {
+		id : 11,
+		pId : 1,
+		name : "一分厂"
+	}, {
+		id : 12,
+		pId : 1,
+		name : "二分厂"
+	}, {
+		id : 13,
+		pId : 1,
+		name : "三分厂"
+	}, {
+		id : 14,
+		pId : 1,
+		name : "四分厂"
+	}, {
+		id : 15,
+		pId : 1,
+		name : "五分厂"
+	}, {
+		id : 16,
+		pId : 1,
+		name : "六分厂"
+	} ];
+
+	var code;
+
+	function setCheck() {
+		var zTree = $.fn.zTree.getZTreeObj("treeDemo"), py = $("#py").attr(
+				"checked") ? "p" : "", sy = $("#sy").attr("checked") ? "s" : "", pn = $(
+				"#pn").attr("checked") ? "p" : "", sn = $("#sn")
+				.attr("checked") ? "s" : "", type = {
+			"Y" : py + sy,
+			"N" : pn + sn
+		};
+		zTree.setting.check.chkboxType = {
+			"Y" : "ps",
+			"N" : "ps"
+		};
+		showCode('setting.check.chkboxType = { "Y" : "' + type.Y + '", "N" : "'
+				+ type.N + '" };');
+	}
+	function showCode(str) {
+		if (!code)
+			code = $("#code");
+		code.empty();
+		code.append("<li>" + str + "</li>");
+	}
+
+	$(document).ready(function() {
+		$.fn.zTree.init($("#treeDemo"), setting, zNodes);
+		setCheck();
+		$("#py").bind("change", setCheck);
+		$("#sy").bind("change", setCheck);
+		$("#pn").bind("change", setCheck);
+		$("#sn").bind("change", setCheck);
+	});
+</script>
+</head>
+<body>
+	<!-- 正文部分 -->
+	<div style="width: 80%; margin-left: 10%;">
+		<h3>编辑部门</h3>
+		<hr />
+		<div class="form-group row form-inline">
+			<label class="col-sm-3">部门名</label> <input class="form-control"
+				type="text" style="display: inline-block;">
+		</div>
+		<div class="form-group row form-inline">
+			<label class="col-sm-3">负责人</label> <input class="form-control"
+				type="text" style="display: inline-block;">
+		</div>
+		<div class="form-group row form-inline">
+			<label class="col-sm-3">联系方式</label> <input class="form-control"
+				type="text" style="display: inline-block;">
+		</div>
+		<div class="form-group row form-inline">
+			<label class="col-sm-3">地址</label> <input class="form-control"
+				type="text" style="display: inline-block;">
+		</div>
+		<div class="form-group row form-inline">
+			<label class="col-sm-3">上级部门</label>
+			<!-- ztree部分 -->
+			<ul id="treeDemo" class="ztree"
+				style="margin: 5px 15px 0px 10px; height: 200px; border-color: #CCCCCC;"></ul>
+		</div>
+		<button class="btn btn-primary">提交</button>
+		<a href="factoryMag.html"><button class="btn btn-primary">返回</button></a>
+	</div>
+</html>

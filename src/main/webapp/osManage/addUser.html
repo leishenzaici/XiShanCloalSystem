@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<!-- 系统管理->用户管理->重置密码 -->
+<html>
+<head>
+<!-- 编码方式 -->
+<meta charset="utf-8">
+<!-- 适配各种频幕 -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- 标题 -->
+<title>reset</title>
+<!-- Bootstrap CSS -->
+<link href="../css/bootstrap.css" rel="stylesheet">
+<link href="../css/bootstrap.min.css" rel="stylesheet">
+<link href="../css/bootstrap-theme.css" rel="stylesheet">
+</head>
+<body>
+	<!-- 正文部分 -->
+	<div style="width: 80%; margin-left: 10%;">
+		<h2>添加用户</h2>
+		<hr>
+		<div class="form-group row form-inline">
+			<label class="col-sm-3">姓名</label> <input class="form-control"
+				type="text" style="display: inline-block;">
+		</div>
+		<div class="form-group row form-inline">
+			<label class="col-sm-3">用户名</label> <input class="form-control"
+				type="text" style="display: inline-block;">
+		</div>
+		<div class="form-group row form-inline">
+
+			<label class="col-sm-3">所属分厂</label> <label class="radio-inline">
+				<input name="factory" type="radio" value="1">一分厂
+			</label> <label class="radio-inline"> <input name="factory"
+				type="radio" value="2">二分厂
+			</label> <label class="radio-inline"> <input name="factory"
+				type="radio" value="3">三分厂
+			</label> <label class="radio-inline"> <input name="factory"
+				type="radio" value="4">四分厂
+			</label> <label class="radio-inline"> <input name="factory"
+				type="radio" value="5">五分厂
+			</label>
+		</div>
+		<div class="form-group row form-inline">
+			<label class="col-sm-3">E-mai</label> <input class="form-control"
+				type="text" style="display: inline;">
+		</div>
+		<div class="form-group row">
+			<label class="col-sm-3">状态</label> <label class="radio-inline">
+				<input name="status" type="radio" value="0">正常
+			</label> <label class="radio-inline"> <input name="status"
+				type="radio" value="1">禁用
+			</label>
+		</div>
+		<div class="form-group row">
+			<label class="col-sm-3">角色</label> <label class="radio-inline">
+				<input name="role" type="radio" value="0">管理员
+			</label> <label class="radio-inline"> <input name="role" type="radio"
+				value="0">普通用户
+			</label> <label class="radio-inline"> <input name="role" type="radio"
+				value="0">超级用户
+			</label>
+		</div>
+		<button class="btn btn-primary">提交</button>
+		<a href="userMag.html"><button class="btn btn-primary">返回</button></a>
+	</div>
+</html>
